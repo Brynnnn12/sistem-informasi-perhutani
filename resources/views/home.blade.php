@@ -206,3 +206,10 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        // Data hutan untuk modal
+        window.forestsData = @json($forests ?? []);
+    </script>
+@endpush

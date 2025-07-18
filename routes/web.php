@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -42,14 +44,8 @@ Route::middleware('auth')->group(function () {
     })->name('submissions.create');
 
     // Add POST routes for actual submission handling
-    Route::post('/reports', function () {
-        // Handle report creation
-        return response()->json(['message' => 'Report created successfully']);
-    })->name('reports.store');
-
-    Route::post('/submissions', function () {
-        // Handle submission creation
-        return response()->json(['message' => 'Submission created successfully']);
-    })->name('submissions.store');
+    Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+    Route::post('/submissions', [SubmissionController::class, 'store'])->name('submissions.store');
 });
+
 require __DIR__ . '/auth.php';

@@ -27,6 +27,9 @@ class HomeController extends Controller
             'users' => User::count(),
         ];
 
-        return view('home', compact('articles', 'stats'));
+        // Get forests for modal dropdown
+        $forests = Forest::select('id', 'name')->get();
+
+        return view('home', compact('articles', 'stats', 'forests'));
     }
 }
