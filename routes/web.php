@@ -33,6 +33,14 @@ Route::get('/articles/{slug}', function ($slug) {
     return view('articles.show', compact('article'));
 })->name('articles.show');
 
+// // Route untuk publish semua artikel (debug/admin purpose)
+// Route::post('/articles/publish-all', function () {
+//     \App\Models\Article::whereNull('published_at')
+//         ->update(['published_at' => now()]);
+
+//     return redirect()->route('articles.index')->with('success', 'Semua artikel berhasil di-publish!');
+// })->name('articles.publish-all');
+
 Route::middleware('auth')->group(function () {
     // Dummy routes for backward compatibility (redirect to home with modal trigger)
     Route::get('/reports/create', function () {

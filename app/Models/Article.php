@@ -25,7 +25,7 @@ class Article extends Model
         'published_at' => 'datetime',
     ];
 
-    // Auto generate slug dari title
+    // Auto generate slug dari title dan set published_at
     protected static function boot()
     {
         parent::boot();
@@ -33,6 +33,11 @@ class Article extends Model
         static::creating(function ($article) {
             if (empty($article->slug)) {
                 $article->slug = Str::slug($article->title);
+            }
+
+            // Otomatis set published_at ke sekarang jika belum diset
+            if (empty($article->published_at)) {
+                $article->published_at = now();
             }
         });
 

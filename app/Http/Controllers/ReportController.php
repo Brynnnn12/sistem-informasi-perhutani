@@ -26,18 +26,13 @@ class ReportController extends Controller
         }
 
         Report::create([
-            'user_id' => Auth::id(),
             'forest_id' => $request->forest_id,
             'title' => $request->title,
             'description' => $request->description,
             'photo' => $photoPath,
-            'status' => 'pending',
             'reported_at' => $request->reported_at,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Laporan berhasil dikirim. Tim kami akan segera menindaklanjuti.',
-        ]);
+        return redirect()->back()->with('success', 'Laporan berhasil dikirim. Tim kami akan segera menindaklanjuti.');
     }
 }

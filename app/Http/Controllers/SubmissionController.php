@@ -24,17 +24,12 @@ class SubmissionController extends Controller
         }
 
         Submission::create([
-            'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
             'attachment' => $attachmentPath,
-            'status' => 'pending',
             'submitted_at' => $request->submitted_at,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Pengajuan berhasil dikirim. Mohon tunggu proses verifikasi.',
-        ]);
+        return redirect()->back()->with('success', 'Pengajuan berhasil dikirim. Mohon tunggu proses verifikasi.');
     }
 }

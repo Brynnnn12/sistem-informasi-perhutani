@@ -106,7 +106,10 @@ class ArticleResource extends Resource
                     ->disk('public')
                     ->visibility('public'),
                 Forms\Components\DateTimePicker::make('published_at')
-                    ->label('Tanggal Publikasi'),
+                    ->label('Tanggal Publikasi')
+                    ->default(now())
+                    ->required()
+                    ->helperText('Artikel akan langsung dipublikasikan pada tanggal ini'),
                 Forms\Components\Hidden::make('created_by')
                     ->default(function () {
                         return Auth::id();

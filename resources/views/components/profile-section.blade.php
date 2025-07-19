@@ -1,5 +1,5 @@
 @auth
-    <section class="py-12 bg-gradient-to-r from-green-50 to-blue-50">
+    <section class="py-12 bg-gradient-to-r from-green-50 to-blue-50" x-data="{}">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-xl shadow-lg p-6 lg:p-8">
                 <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
@@ -24,7 +24,7 @@
 
                     <!-- Quick Actions -->
                     <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-                        <button onclick="openReportModal()"
+                        <button @click="$dispatch('open-report-modal')"
                             class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center">
                             <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,7 +33,7 @@
                             </svg>
                             Laporkan Masalah
                         </button>
-                        <button onclick="openSubmissionModal()"
+                        <button @click="$dispatch('open-submission-modal')"
                             class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center">
                             <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

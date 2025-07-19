@@ -174,7 +174,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-green-600">
+    <section class="py-20 bg-green-600" x-data="{}">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
                 Bergabunglah dalam Menjaga Kelestarian Hutan
@@ -193,11 +193,11 @@
                         Masuk
                     </a>
                 @else
-                    <button onclick="openReportModal()"
+                    <button @click="$dispatch('open-report-modal')"
                         class="bg-white text-green-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
                         Laporkan Masalah
                     </button>
-                    <button onclick="openSubmissionModal()"
+                    <button @click="$dispatch('open-submission-modal')"
                         class="border-2 border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
                         Ajukan Permohonan
                     </button>

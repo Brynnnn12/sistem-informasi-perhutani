@@ -79,20 +79,11 @@ class SubmissionResource extends Resource
                 Forms\Components\Hidden::make('user_id')
                     ->default(function () {
                         return Auth::id();
-                    })
-                    ->visible(fn() => Auth::user()?->hasRole('masyarakat')),
-
-                Forms\Components\Select::make('user_id')
-                    ->label('Pemohon')
-                    ->relationship('user', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->disabled()
-                    ->visible(fn() => Auth::user()?->hasAnyRole(['admin', 'petugas'])),
+                    }),
 
                 Forms\Components\Hidden::make('status')
                     ->default('pending')
-                    ->visible(fn() => Auth::user()?->hasRole('masyarakat')),
+                    ->visible(fn(string $context) => $context === 'create'),
 
                 Forms\Components\Select::make('status')
                     ->label('Status')
@@ -102,7 +93,7 @@ class SubmissionResource extends Resource
                         'rejected' => 'Ditolak',
                     ])
                     ->default('pending')
-                    ->visible(fn() => Auth::user()?->hasAnyRole(['admin', 'petugas'])),
+                    ->visible(fn(string $context) => $context === 'edit' && Auth::user()?->hasAnyRole(['admin', 'petugas'])),
 
                 Forms\Components\TextInput::make('title')
                     ->label('Judul Pengajuan')

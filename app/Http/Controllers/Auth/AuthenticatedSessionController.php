@@ -28,7 +28,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+
+        // Role-based redirect
+        if ($user->hasAnyRole(['admin', 'petugas'])) {
+            // Admin dan petugas ke panel admin Filament
+            return redirect()->intended('/admin');
+        } else {
+            // Masyarakat ke home page
+            return redirect()->intended(route('home'));
+        }
     }
 
     /**
@@ -42,6 +51,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Anda berhasil logout');
     }
 }

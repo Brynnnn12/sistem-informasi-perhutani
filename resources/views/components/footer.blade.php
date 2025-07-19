@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="bg-gray-900 text-white">
+<footer class="bg-gray-900 text-white" x-data="{}">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Brand -->
@@ -59,9 +59,9 @@
                 <h3 class="text-lg font-semibold mb-4 text-green-400">Layanan</h3>
                 <ul class="space-y-3">
                     @auth
-                        <li><button onclick="openReportModal()"
+                        <li><button @click="$dispatch('open-report-modal')"
                                 class="text-gray-300 hover:text-white transition-colors">Lapor Masalah</button></li>
-                        <li><button onclick="openSubmissionModal()"
+                        <li><button @click="$dispatch('open-submission-modal')"
                                 class="text-gray-300 hover:text-white transition-colors">Ajukan Permohonan</button></li>
                     @else
                         <li><a href="{{ route('login') }}" class="text-gray-300 hover:text-white transition-colors">Lapor

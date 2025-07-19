@@ -80,20 +80,11 @@ class ReportResource extends Resource
                 Forms\Components\Hidden::make('user_id')
                     ->default(function () {
                         return Auth::id();
-                    })
-                    ->visible(fn() => Auth::user()?->hasRole('masyarakat')),
-
-                Forms\Components\Select::make('user_id')
-                    ->label('Pelapor')
-                    ->relationship('user', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->disabled()
-                    ->visible(fn() => Auth::user()?->hasAnyRole(['admin', 'petugas'])),
+                    }),
 
                 Forms\Components\Hidden::make('status')
                     ->default('pending')
-                    ->visible(fn() => Auth::user()?->hasRole('masyarakat')),
+                    ->visible(fn(string $context) => $context === 'create'),
 
                 Forms\Components\Select::make('status')
                     ->label('Status')
@@ -103,7 +94,7 @@ class ReportResource extends Resource
                         'resolved' => 'Selesai',
                     ])
                     ->default('pending')
-                    ->visible(fn() => Auth::user()?->hasAnyRole(['admin', 'petugas'])),
+                    ->visible(fn(string $context) => $context === 'edit' && Auth::user()?->hasAnyRole(['admin', 'petugas'])),
 
                 Forms\Components\Select::make('forest_id')
                     ->label('Lokasi Hutan')

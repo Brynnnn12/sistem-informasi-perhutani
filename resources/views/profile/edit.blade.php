@@ -125,7 +125,7 @@
             </div>
 
             <!-- Quick Actions Card -->
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6" x-data="{}">
                 <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                     <div class="flex items-center justify-between">
                         <div>
@@ -163,7 +163,7 @@
                         </svg>
                     </div>
                     <div class="mt-4">
-                        <button onclick="openReportModal()"
+                        <button @click="$dispatch('open-report-modal')"
                             class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors">
                             Buat Laporan
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,7 +188,7 @@
                         </svg>
                     </div>
                     <div class="mt-4">
-                        <button onclick="openSubmissionModal()"
+                        <button @click="$dispatch('open-submission-modal')"
                             class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">
                             Buat Pengajuan
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

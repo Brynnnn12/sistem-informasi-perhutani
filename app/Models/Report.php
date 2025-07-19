@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class Report extends Model
 {
@@ -26,6 +27,23 @@ class Report extends Model
         'verified_at' => 'datetime',
         'status' => 'string',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($report) {
+            if (!$report->user_id) {
+                $report->user_id = Auth::id();
+            }
+            if (!$report->status) {
+                $report->status = 'pending';
+            }
+            if (!$report->reported_at) {
+                $report->reported_at = now();
+            }
+        });
+    }
 
     // Relasi dengan User
     public function user(): BelongsTo

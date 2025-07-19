@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin/*',
             'livewire/*',
         ]);
+
+        // Register admin access middleware
+        $middleware->alias([
+            'admin.access' => \App\Http\Middleware\AdminAccess::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
