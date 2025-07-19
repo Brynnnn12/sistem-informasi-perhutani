@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\EmailPreviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -16,6 +17,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
@@ -55,5 +57,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
     Route::post('/submissions', [SubmissionController::class, 'store'])->name('submissions.store');
 });
+
+// Email Preview (hanya untuk development)
+if (app()->environment('local')) {
+    Route::get('/email-preview/reset-password', [EmailPreviewController::class, 'resetPassword'])
+        ->name('email.preview.reset-password');
+}
 
 require __DIR__ . '/auth.php';

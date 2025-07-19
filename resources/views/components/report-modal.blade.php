@@ -119,7 +119,17 @@
                             class="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-colors">
                             Batal
                         </button>
-                        <button type="submit"
+                        <button type="button"
+                            x-sweetalert.confirm="{
+                                title: 'Kirim Laporan?',
+                                text: 'Pastikan semua informasi sudah benar sebelum mengirim.',
+                                confirmText: 'Ya, Kirim!',
+                                cancelText: 'Periksa Lagi',
+                                onConfirm: () => {
+                                    const form = $el.closest('form');
+                                    form.submit();
+                                }
+                            }"
                             class="px-6 py-2.5 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors">
                             <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">

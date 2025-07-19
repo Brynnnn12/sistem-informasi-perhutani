@@ -46,6 +46,9 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-50">
+    <!-- Page Loader -->
+    <x-page-loader />
+
     <!-- Navigation -->
     <x-navbar />
 
@@ -68,6 +71,51 @@
 
     <!-- Additional Scripts -->
     @stack('scripts')
+
+    <!-- SweetAlert for session messages -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonColor: '#16a34a',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if (session('error'))
+                Swal.fire({
+                    title: 'Error!',
+                    text: '{{ session('error') }}',
+                    icon: 'error',
+                    confirmButtonColor: '#dc2626',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if (session('warning'))
+                Swal.fire({
+                    title: 'Peringatan!',
+                    text: '{{ session('warning') }}',
+                    icon: 'warning',
+                    confirmButtonColor: '#f59e0b',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if (session('info'))
+                Swal.fire({
+                    title: 'Informasi',
+                    text: '{{ session('info') }}',
+                    icon: 'info',
+                    confirmButtonColor: '#3b82f6',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
 </body>
 
 </html>

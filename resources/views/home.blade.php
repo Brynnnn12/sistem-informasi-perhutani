@@ -184,20 +184,50 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 @guest
-                    <a href="{{ route('register') }}"
+                    <button
+                        x-sweetalert.confirm="{
+                            title: 'Bergabung Sekarang?',
+                            text: 'Daftar untuk mulai berkontribusi dalam menjaga kelestarian hutan.',
+                            confirmText: 'Ya, Daftar!',
+                            cancelText: 'Nanti saja',
+                            onConfirm: () => {
+                                window.location.href = '{{ route('register') }}';
+                            }
+                        }"
                         class="bg-white text-green-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
                         Daftar Sekarang
-                    </a>
-                    <a href="{{ route('login') }}"
+                    </button>
+                    <button
+                        x-sweetalert.confirm="{
+                            title: 'Masuk ke Akun?',
+                            text: 'Masuk untuk mengakses fitur lengkap sistem.',
+                            confirmText: 'Ya, Masuk!',
+                            cancelText: 'Batal',
+                            onConfirm: () => {
+                                window.location.href = '{{ route('login') }}';
+                            }
+                        }"
                         class="border-2 border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
                         Masuk
-                    </a>
+                    </button>
                 @else
-                    <button @click="$dispatch('open-report-modal')"
+                    <button
+                        x-sweetalert.success="{
+                            title: 'Siap Membuat Laporan!',
+                            text: 'Anda akan membuka form laporan masalah hutan.',
+                            confirmText: 'Lanjutkan'
+                        }"
+                        @click="$dispatch('open-report-modal')"
                         class="bg-white text-green-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
                         Laporkan Masalah
                     </button>
-                    <button @click="$dispatch('open-submission-modal')"
+                    <button
+                        x-sweetalert.success="{
+                            title: 'Siap Mengajukan Permohonan!',
+                            text: 'Anda akan membuka form permohonan.',
+                            confirmText: 'Lanjutkan'
+                        }"
+                        @click="$dispatch('open-submission-modal')"
                         class="border-2 border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 rounded-lg font-semibold text-lg transition-colors">
                         Ajukan Permohonan
                     </button>

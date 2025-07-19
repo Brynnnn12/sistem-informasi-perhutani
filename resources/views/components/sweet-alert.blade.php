@@ -1,5 +1,4 @@
 @if (session('success') || session('error') || session('warning') || session('info'))
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('success'))

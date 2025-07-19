@@ -12,28 +12,21 @@ class Dashboard extends BaseDashboard
     public function getWidgets(): array
     {
         $user = Auth::user();
-        $widgets = [];
 
         if ($user?->hasRole('masyarakat')) {
-            // Widget untuk masyarakat
-            $widgets = [
+            // Dashboard dengan grafik untuk masyarakat
+            return [
                 \App\Filament\Widgets\UserStatsWidget::class,
                 \App\Filament\Widgets\RecentActivitiesWidget::class,
             ];
         } else {
-            // Widget untuk admin dan petugas
-            $widgets = [
-                \App\Filament\Widgets\StatsOverviewWidget::class,
+            // Dashboard dengan chart untuk admin dan petugas (tanpa stats status)
+            return [
+                \App\Filament\Widgets\UserStatsWidget::class,
                 \App\Filament\Widgets\ReportStatusChart::class,
                 \App\Filament\Widgets\SubmissionStatusChart::class,
-                \App\Filament\Widgets\MonthlyActivityChart::class,
-                \App\Filament\Widgets\ForestTypeChart::class,
-                \App\Filament\Widgets\ForestOverviewWidget::class,
-                \App\Filament\Widgets\RecentActivitiesWidget::class,
             ];
         }
-
-        return $widgets;
     }
 
     public function getColumns(): int | string | array
@@ -41,7 +34,7 @@ class Dashboard extends BaseDashboard
         return [
             'sm' => 1,
             'md' => 2,
-            'lg' => 3,
+            'lg' => 2, // Maksimal 2 kolom
         ];
     }
 }

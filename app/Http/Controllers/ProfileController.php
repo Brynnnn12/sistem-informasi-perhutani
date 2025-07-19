@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,22 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Update the user's avatar.
+     */
+    public function updateAvatar(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'avatar' => ['required', 'string', 'in:' . implode(',', array_keys(User::getAvailableAvatars()))]
+        ]);
+
+        $request->user()->update([
+            'avatar' => $request->avatar
+        ]);
+
+        return Redirect::route('profile.edit')->with('status', 'avatar-updated');
     }
 
     /**

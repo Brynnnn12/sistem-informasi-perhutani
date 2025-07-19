@@ -10,8 +10,7 @@
         <!-- Profile Picture Section -->
         <div class="flex items-center space-x-6">
             <div class="relative">
-                <img class="h-20 w-20 rounded-full border-4 border-gray-200 shadow-sm"
-                    src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&color=16a34a&background=dcfce7&size=200"
+                <img class="h-20 w-20 rounded-full border-4 border-gray-200 shadow-sm" src="{{ $user->getAvatarUrl() }}"
                     alt="{{ $user->name }}">
                 <button type="button"
                     class="absolute bottom-0 right-0 bg-green-600 rounded-full p-1.5 border-2 border-white hover:bg-green-700 transition-colors">

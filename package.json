@@ -19,6 +19,8 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
+        "@dicebear/collection": "^9.2.3",
+        "@dicebear/core": "^9.2.3",
         "sweetalert2": "^11.22.2"
     }
 }
