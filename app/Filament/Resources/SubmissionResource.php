@@ -196,6 +196,23 @@ class SubmissionResource extends Resource
                     ->label('Pemohon')
                     ->relationship('user', 'name'),
             ])
+            ->headerActions([
+                Tables\Actions\Action::make('printAllData')
+                    ->label('Cetak Semua Data PDF')
+                    ->icon('heroicon-o-document-text')
+                    ->color('info')
+                    ->action(function () {
+                        $submissions = static::getEloquentQuery()->with(['user'])->get();
+
+                        return response()->streamDownload(function () use ($submissions) {
+                            echo app('dompdf.wrapper')
+                                ->loadView('pdf.submissions-bulk', ['submissions' => $submissions])
+                                ->setPaper('a4', 'portrait')
+                                ->stream();
+                        }, 'semua-pengajuan-' . now()->format('Y-m-d') . '.pdf');
+                    })
+                    ->tooltip('Download semua pengajuan dalam satu PDF'),
+            ])
             ->actions([
                 Tables\Actions\Action::make('updateStatus')
                     ->label('Update Status')
@@ -213,9 +230,6 @@ class SubmissionResource extends Resource
                         Forms\Components\DateTimePicker::make('approved_at')
                             ->label('Tanggal Persetujuan')
                             ->default(now()),
-                        Forms\Components\Textarea::make('notes')
-                            ->label('Catatan')
-                            ->placeholder('Catatan untuk pemohon (opsional)'),
                     ])
                     ->action(function (Submission $record, array $data): void {
                         $record->update([
@@ -262,6 +276,23 @@ class SubmissionResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('printAllPDF')
+                        ->label('Cetak PDF Semua')
+                        ->icon('heroicon-o-printer')
+                        ->color('success')
+                        ->action(function (\Illuminate\Database\Eloquent\Collection $records) {
+                            // Load relationships for all records
+                            $records->load(['user']);
+
+                            return response()->streamDownload(function () use ($records) {
+                                echo app('dompdf.wrapper')
+                                    ->loadView('pdf.submissions-bulk', ['submissions' => $records])
+                                    ->setPaper('a4', 'portrait')
+                                    ->stream();
+                            }, 'pengajuan-bulk-' . now()->format('Y-m-d') . '.pdf');
+                        })
+                        ->deselectRecordsAfterCompletion()
+                        ->tooltip('Download pengajuan terpilih dalam satu PDF'),
                 ]),
             ])
             ->defaultSort('submitted_at', 'desc');

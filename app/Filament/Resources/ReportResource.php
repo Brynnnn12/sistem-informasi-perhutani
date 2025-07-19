@@ -203,6 +203,23 @@ class ReportResource extends Resource
                     ->label('Lokasi Hutan')
                     ->relationship('forest', 'name'),
             ])
+            ->headerActions([
+                Tables\Actions\Action::make('printAllData')
+                    ->label('Cetak Semua Data PDF')
+                    ->icon('heroicon-o-document-text')
+                    ->color('info')
+                    ->action(function () {
+                        $reports = static::getEloquentQuery()->with(['user', 'forest'])->get();
+
+                        return response()->streamDownload(function () use ($reports) {
+                            echo app('dompdf.wrapper')
+                                ->loadView('pdf.reports-bulk', ['reports' => $reports])
+                                ->setPaper('a4', 'portrait')
+                                ->stream();
+                        }, 'semua-laporan-' . now()->format('Y-m-d') . '.pdf');
+                    })
+                    ->tooltip('Download semua laporan dalam satu PDF'),
+            ])
             ->actions([
                 Tables\Actions\Action::make('updateStatus')
                     ->label('Update Status')
@@ -235,6 +252,23 @@ class ReportResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('printAllPDF')
+                        ->label('Cetak PDF Semua')
+                        ->icon('heroicon-o-printer')
+                        ->color('success')
+                        ->action(function (\Illuminate\Database\Eloquent\Collection $records) {
+                            // Load relationships for all records
+                            $records->load(['user', 'forest']);
+
+                            return response()->streamDownload(function () use ($records) {
+                                echo app('dompdf.wrapper')
+                                    ->loadView('pdf.reports-bulk', ['reports' => $records])
+                                    ->setPaper('a4', 'portrait')
+                                    ->stream();
+                            }, 'laporan-bulk-' . now()->format('Y-m-d') . '.pdf');
+                        })
+                        ->deselectRecordsAfterCompletion()
+                        ->tooltip('Download laporan terpilih dalam satu PDF'),
                 ]),
             ]);
     }
