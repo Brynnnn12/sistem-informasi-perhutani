@@ -19,89 +19,103 @@
 
 Sistem Informasi Perhutani adalah platform digital yang dirancang khusus untuk mendukung pengelolaan informasi kehutanan yang efektif dan berkelanjutan. Sistem ini menyediakan berbagai fitur untuk membantu dalam:
 
--   **📊 Pelaporan Digital**: Sistem pelaporan masalah kehutanan secara real-time
--   **🌲 Database Tanaman**: Katalog lengkap spesies flora dan fauna hutan
--   **📄 Pengajuan Izin**: Platform untuk permohonan izin pemanfaatan lahan
--   **📈 Dashboard Analitik**: Visualisasi data dan statistik kehutanan
--   **👥 Kolaborasi Komunitas**: Platform komunikasi antar stakeholder
--   **🗺️ Pemetaan Digital**: Sistem informasi geografis untuk area hutan
--   **📚 Pusat Edukasi**: Resource pembelajaran tentang konservasi hutan
--   **🔔 Notifikasi Real-time**: Alert untuk kondisi darurat atau perubahan status
+-   **📊 Pelaporan Kejadian Hutan**: Sistem pelaporan masalah kehutanan secara digital dengan tracking status
+-   **🌲 Database Tanaman**: Katalog lengkap spesies tanaman hutan dengan informasi detail
+-   **📄 Pengajuan Pemanfaatan**: Platform untuk permohonan izin pemanfaatan lahan hutan
+-   **�️ Manajemen Hutan**: Database lokasi hutan dengan informasi geografis
+-   **👥 Manajemen Pengguna**: Sistem multi-role dengan kontrol akses yang fleksibel
+-   **� Dashboard Admin**: Interface admin yang modern dengan Filament
+-   **� Export PDF**: Fitur cetak laporan dalam format PDF yang kompak
+-   **� Responsive Design**: Antarmuka yang responsif untuk berbagai perangkat
 
 ## Fitur Utama
 
 ### 🔐 Sistem Otentikasi & Otorisasi
 
--   Multi-level user management (Admin, Petugas Lapangan, Masyarakat)
+-   Multi-level user management (Admin, Petugas, Masyarakat)
 -   Role-based access control menggunakan Spatie Permission
--   Profile management dengan avatar dan informasi detail
+-   Custom password reset dengan email template yang menarik
+-   Profile management dengan informasi lengkap pengguna
 
-### 📊 Modul Pelaporan
+### 📊 Modul Pelaporan Kejadian
 
--   Form pelaporan interaktif dengan validasi
--   Upload foto dan dokumen pendukung
--   Tracking status laporan real-time
--   Notifikasi otomatis untuk follow-up
+-   Form pelaporan interaktif dengan validasi real-time
+-   Upload foto bukti untuk dokumentasi
+-   Status tracking (Menunggu, Dalam Proses, Selesai)
+-   Sistem verifikasi oleh petugas yang berwenang
+-   Export laporan ke PDF dengan format tabel yang kompak
 
-### 🌿 Database Biodiversitas
+### 🌿 Database Tanaman Hutan
 
--   Katalog spesies tanaman dengan informasi lengkap
--   Pencarian dan filter berdasarkan kategori
--   Gambar dan deskripsi detail setiap spesies
--   Status konservasi dan persebaran
+-   Katalog lengkap spesies tanaman hutan
+-   Informasi detail meliputi nama ilmiah, deskripsi, dan karakteristik
+-   Pencarian dan filter berdasarkan kategori tanaman
+-   Interface yang user-friendly untuk browsing data
 
-### 📋 Manajemen Pengajuan
+### 📋 Manajemen Pengajuan Pemanfaatan
 
--   Form pengajuan izin online
--   Workflow approval multi-level
--   Document management terintegrasi
--   Tracking progress dan timeline
+-   Form pengajuan pemanfaatan lahan hutan online
+-   Sistem persetujuan dengan tracking status otomatis
+-   Upload dokumen pendukung dengan validasi file
+-   Workflow approval untuk memproses pengajuan
+-   Export data pengajuan ke PDF format tabel
 
-### 📈 Dashboard & Analytics
+### 🗂️ Manajemen Database Hutan
 
--   Visualisasi data menggunakan Chart.js
--   Report generator dengan export PDF/Excel
--   Key Performance Indicators (KPI) kehutanan
--   Trend analysis dan forecasting
+-   Database lokasi hutan dengan informasi geografis
+-   Informasi detail setiap area hutan
+-   Sistem kategorisasi berdasarkan jenis hutan
+-   Interface admin untuk manajemen data master
+
+### 📈 Dashboard & Interface Modern
+
+-   Dashboard admin yang intuitif menggunakan Filament
+-   Antarmuka yang responsif dan mobile-friendly
+-   Navigasi yang mudah digunakan dengan tree loader
+-   Custom email templates dengan design yang menarik
+-   Dark/light mode support untuk kenyamanan pengguna
 
 ## Teknologi yang Digunakan
 
 ### Backend
 
--   **Laravel 11.x**: PHP framework untuk rapid development
--   **MySQL/SQLite**: Database management system
--   **Filament**: Admin panel yang powerful dan modern
--   **Spatie Permission**: Role dan permission management
+-   **Laravel 11.x**: PHP framework modern untuk rapid development
+-   **MySQL/SQLite**: Database management system yang reliable
+-   **Filament**: Admin panel yang powerful dan modern dengan interface yang intuitif
+-   **Spatie Permission**: Role dan permission management yang fleksibel
+-   **barryvdh/laravel-dompdf**: Library untuk generate PDF reports
 
 ### Frontend
 
--   **Blade Templates**: Server-side rendering dengan komponen modular
--   **Tailwind CSS**: Utility-first CSS framework
--   **Alpine.js**: Lightweight JavaScript framework
--   **Chart.js**: Library untuk visualisasi data
+-   **Blade Templates**: Server-side rendering dengan komponen yang modular
+-   **Tailwind CSS**: Utility-first CSS framework untuk styling yang konsisten
+-   **Alpine.js**: Lightweight JavaScript framework untuk interaktivitas
+-   **SweetAlert2**: Library untuk notifikasi dan konfirmasi yang menarik
 
 ### Tools & Integration
 
--   **Vite**: Modern build tool untuk asset compilation
--   **Pest**: Testing framework untuk PHP
--   **Git**: Version control system
--   **Composer**: PHP dependency manager
+-   **Vite**: Modern build tool untuk asset compilation dan hot reloading
+-   **Pest**: Modern testing framework untuk PHP dengan syntax yang ekspresif
+-   **Git**: Version control system untuk collaborative development
+-   **Composer**: PHP dependency manager untuk package management
+-   **NPM**: Node package manager untuk frontend dependencies
 
 ## Instalasi & Setup
 
 ### Prasyarat
 
 -   PHP 8.2 atau lebih tinggi
--   Composer
--   Node.js & NPM
--   MySQL atau SQLite
+-   Composer 2.x
+-   Node.js 18.x & NPM
+-   MySQL 8.x atau SQLite 3.x
+-   Web server (Apache/Nginx) atau PHP built-in server
 
 ### Langkah Instalasi
 
 1. **Clone Repository**
 
 ```bash
-git clone https://github.com/username/sistem-informasi-perhutani.git
+git clone https://github.com/Brynnnn12/sistem-informasi-perhutani.git
 cd sistem-informasi-perhutani
 ```
 
@@ -123,23 +137,68 @@ php artisan key:generate
 
 ```bash
 # Edit .env file untuk konfigurasi database
+# Contoh untuk SQLite (default):
+# DB_CONNECTION=sqlite
+# DB_DATABASE=/absolute/path/to/database.sqlite
+
 php artisan migrate
 php artisan db:seed
 ```
 
-5. **Build Assets**
+5. **Create Storage Link**
+
+```bash
+php artisan storage:link
+```
+
+6. **Build Assets**
 
 ```bash
 npm run build
-# atau untuk development
+# atau untuk development dengan hot reload
 npm run dev
 ```
 
-6. **Start Server**
+7. **Start Server**
 
 ```bash
 php artisan serve
 ```
+
+## User Access & Roles
+
+Sistem memiliki 3 level akses pengguna:
+
+### 👨‍💼 Admin
+
+-   Akses penuh ke semua fitur sistem
+-   Manajemen pengguna dan role
+-   Approve/reject pengajuan dan laporan
+-   Export dan generate reports
+
+### 👮‍♂️ Petugas
+
+-   Verifikasi laporan kejadian hutan
+-   Review pengajuan pemanfaatan
+-   Akses ke data master (hutan, tanaman)
+-   View dashboard dan statistik
+
+### 👥 Masyarakat
+
+-   Submit laporan kejadian hutan
+-   Ajukan permohonan pemanfaatan
+-   View status pengajuan sendiri
+-   Update profil personal
+
+## Fitur PDF Export
+
+Sistem dilengkapi dengan fitur export PDF yang sangat efisien:
+
+-   **📄 Format Tabel Kompak**: Layout yang dioptimasi untuk muat lebih banyak data per halaman
+-   **📊 Laporan Kejadian**: Export semua data laporan dalam format tabel
+-   **📋 Data Pengajuan**: Export data pengajuan pemanfaatan hutan
+-   **🎨 Design Professional**: Template PDF yang bersih dan mudah dibaca
+-   **💾 Bulk Export**: Export multiple records sekaligus dalam satu file PDF
 
 ## Kontribusi
 
@@ -153,10 +212,25 @@ Kami sangat menghargai kontribusi dari komunitas! Silakan ikuti panduan berikut:
 
 ### Panduan Kontribusi
 
--   Ikuti PSR-12 coding standards
--   Tulis test untuk fitur baru
+-   Ikuti PSR-12 coding standards untuk consistency
+-   Tulis test untuk fitur baru menggunakan Pest
 -   Update dokumentasi jika diperlukan
--   Pastikan semua test passing
+-   Pastikan semua test passing sebelum submit PR
+-   Gunakan conventional commits untuk pesan commit
+
+## Screenshot & Demo
+
+### Dashboard Admin
+
+![Dashboard](https://via.placeholder.com/800x400?text=Admin+Dashboard+Screenshot)
+
+### Form Laporan
+
+![Laporan](https://via.placeholder.com/800x400?text=Form+Laporan+Screenshot)
+
+### Export PDF
+
+![PDF Export](https://via.placeholder.com/800x400?text=PDF+Export+Screenshot)
 
 ## Lisensi
 
@@ -164,48 +238,58 @@ Sistem Informasi Perhutani adalah open-source software yang dilisensikan di bawa
 
 ## Tim Pengembang
 
--   **Lead Developer**: [Your Name]
--   **Backend Developer**: [Name]
--   **Frontend Developer**: [Name]
--   **UI/UX Designer**: [Name]
+-   **Lead Developer**: Brynnnn12
+-   **Full-Stack Developer**: [Contributing Developer]
+-   **System Analyst**: [System Analyst Name]
+-   **UI/UX Consultant**: [Designer Name]
 
-## Dukungan
+## Dukungan & Kontribusi
 
 Jika Anda mengalami masalah atau memiliki pertanyaan:
 
--   📧 Email: support@perhutani-system.com
--   📱 WhatsApp: +62-xxx-xxxx-xxxx
--   🐛 Issue Tracker: [GitHub Issues](https://github.com/username/sistem-informasi-perhutani/issues)
+-   � **Issue Tracker**: [GitHub Issues](https://github.com/Brynnnn12/sistem-informasi-perhutani/issues)
+-   � **Email**: [your-email@domain.com]
+-   � **Discussions**: [GitHub Discussions](https://github.com/Brynnnn12/sistem-informasi-perhutani/discussions)
+-   📚 **Wiki**: [Project Wiki](https://github.com/Brynnnn12/sistem-informasi-perhutani/wiki)
 
-## Roadmap
+## Roadmap & Development Status
 
-### Q1 2025
+### ✅ Q3 2025 (Completed)
 
--   [x] Setup dasar sistem
--   [x] Modul authentication
--   [x] Dashboard admin dengan Filament
--   [ ] Implementasi sistem pelaporan
+-   [x] Setup dasar sistem dengan Laravel 11
+-   [x] Implementasi authentication & authorization
+-   [x] Dashboard admin dengan Filament yang modern
+-   [x] Sistem pelaporan kejadian hutan lengkap
+-   [x] Database tanaman hutan dengan CRUD operations
+-   [x] Manajemen pengajuan pemanfaatan hutan
+-   [x] Export PDF dengan format tabel yang kompak
+-   [x] Responsive design untuk mobile dan desktop
+-   [x] Custom email templates untuk password reset
+-   [x] Role-based access control (Admin, Petugas, Masyarakat)
 
-### Q2 2025
+### 🚧 Q4 2025 (In Progress)
 
--   [ ] Modul database tanaman
--   [ ] Sistem pengajuan izin
--   [ ] Mobile responsive optimization
--   [ ] API development
+-   [ ] Advanced search dan filtering untuk semua modul
+-   [ ] Dashboard analytics dengan charts dan statistik
+-   [ ] Notification system untuk real-time updates
+-   [ ] API endpoints untuk mobile integration
+-   [ ] Advanced PDF reports dengan more customization
 
-### Q3 2025
+### 📅 Q1 2026 (Planned)
 
--   [ ] Integrasi sistem GIS
--   [ ] Mobile application
--   [ ] Advanced analytics
--   [ ] Real-time notifications
+-   [ ] Mobile application (Flutter/React Native)
+-   [ ] GIS integration untuk mapping hutan
+-   [ ] Machine learning untuk forest condition analysis
+-   [ ] Multi-language support (Bahasa Indonesia & English)
+-   [ ] Advanced user management dengan organizational units
 
-### Q4 2025
+### 🎯 Q2 2026 (Future Vision)
 
--   [ ] Machine learning integration
--   [ ] Performance optimization
--   [ ] Security enhancement
--   [ ] Documentation improvement
+-   [ ] IoT sensor integration untuk forest monitoring
+-   [ ] Blockchain untuk transparent record keeping
+-   [ ] AI-powered forest health prediction
+-   [ ] Integration dengan sistem pemerintah (One Data)
+-   [ ] Mobile offline capability untuk remote areas
 
 ---
 
