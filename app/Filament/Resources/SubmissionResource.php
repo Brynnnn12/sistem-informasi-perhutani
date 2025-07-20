@@ -198,6 +198,7 @@ class SubmissionResource extends Resource
             ])
             ->headerActions([
                 Tables\Actions\Action::make('printAllData')
+                    ->visible(fn() => Auth::user()?->hasAnyRole(['admin', 'petugas']))
                     ->label('Cetak Semua Data PDF')
                     ->icon('heroicon-o-document-text')
                     ->color('info')
@@ -277,7 +278,8 @@ class SubmissionResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('printAllPDF')
-                        ->label('Cetak PDF Semua')
+                        //sembunyikan label cetak PDF semua untuk masyarakat
+                        ->label('Cetak')
                         ->icon('heroicon-o-printer')
                         ->color('success')
                         ->action(function (\Illuminate\Database\Eloquent\Collection $records) {

@@ -205,7 +205,8 @@ class ReportResource extends Resource
             ])
             ->headerActions([
                 Tables\Actions\Action::make('printAllData')
-                    ->label('Cetak Semua Data PDF')
+                    ->label('Cetak')
+                    ->visible(fn() => Auth::user()?->hasAnyRole(['admin', 'petugas']))
                     ->icon('heroicon-o-document-text')
                     ->color('info')
                     ->action(function () {
@@ -222,7 +223,6 @@ class ReportResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('updateStatus')
-                    ->label('Update Status')
                     ->icon('heroicon-m-pencil-square')
                     ->color('warning')
                     ->form([
@@ -253,9 +253,10 @@ class ReportResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('printAllPDF')
-                        ->label('Cetak PDF Semua')
+                        ->label('Cetak')
                         ->icon('heroicon-o-printer')
                         ->color('success')
+                        ->visible(fn() => Auth::user()?->hasAnyRole(['admin', 'petugas']))
                         ->action(function (\Illuminate\Database\Eloquent\Collection $records) {
                             // Load relationships for all records
                             $records->load(['user', 'forest']);

@@ -60,23 +60,19 @@
                             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 z-50">
                             <a href="{{ route('profile.edit') }}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-user-circle mr-2"></i>
                                 Profile
                             </a>
-                            @if (Auth::user()->hasAnyRole(['admin', 'petugas']))
-                                <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                    <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                                        </path>
-                                    </svg>
-                                    Panel Admin
-                                </a>
-                            @endif
+                            <a href="/admin" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-tachometer-alt mr-2"></i>
+                                Dashboard
+                            </a>
+
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
                                     class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>
                                     Logout
                                 </button>
                             </form>

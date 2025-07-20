@@ -33,19 +33,19 @@
         <!-- Stats -->
         <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6">
-                <div class="text-3xl font-bold text-green-200">{{ \App\Models\Forest::count() }}</div>
+                <x-countup :target="\App\Models\Forest::count()" class="text-3xl font-bold text-green-200" />
                 <div class="text-green-100">Hutan Terdaftar</div>
             </div>
             <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6">
-                <div class="text-3xl font-bold text-green-200">{{ \App\Models\Plant::count() }}</div>
+                <x-countup :target="\App\Models\Plant::count()" class="text-3xl font-bold text-green-200" />
                 <div class="text-green-100">Spesies Tanaman</div>
             </div>
             <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6">
-                <div class="text-3xl font-bold text-green-200">{{ \App\Models\Article::count() }}</div>
+                <x-countup :target="\App\Models\Article::count()" class="text-3xl font-bold text-green-200" />
                 <div class="text-green-100">Artikel</div>
             </div>
             <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6">
-                <div class="text-3xl font-bold text-green-200">{{ \App\Models\User::count() }}</div>
+                <x-countup :target="\App\Models\User::count()" class="text-3xl font-bold text-green-200" />
                 <div class="text-green-100">Pengguna Aktif</div>
             </div>
         </div>
